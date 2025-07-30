@@ -28,7 +28,7 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
+  static FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyD9QD7Nq4UzP0vbw2JbiNAllTmSewDehso',
     appId: '1:124227158851:web:4bbc9532436a6c9d4465f6',
     messagingSenderId: '124227158851',
@@ -38,7 +38,7 @@ class DefaultFirebaseOptions {
     measurementId: 'G-W2YVP84H81',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
+  static FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB3ScThRpiBRDsLKs2djdcu6FtW2YIk2TE',
     appId: '1:124227158851:android:26cbf299d96335dd4465f6',
     messagingSenderId: '124227158851',
@@ -46,7 +46,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'vguard-d1153.firebasestorage.app',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
+  static FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAmRSPSS1DrYWPPebPlHs-SsCunFKoMtP0',
     appId: '1:124227158851:ios:5690966a55b85fc84465f6',
     messagingSenderId: '124227158851',
@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.vguard',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
+  static FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAmRSPSS1DrYWPPebPlHs-SsCunFKoMtP0',
     appId: '1:124227158851:ios:5690966a55b85fc84465f6',
     messagingSenderId: '124227158851',
@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.vguard',
   );
 
-  static const FirebaseOptions windows = FirebaseOptions(
+  static FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyD9QD7Nq4UzP0vbw2JbiNAllTmSewDehso',
     appId: '1:124227158851:web:a157d18c1d20fb464465f6',
     messagingSenderId: '124227158851',

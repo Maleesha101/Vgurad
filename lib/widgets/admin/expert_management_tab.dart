@@ -23,7 +23,7 @@ class _ExpertManagementTabState extends State<ExpertManagementTab> {
         _specialtyController.text.isEmpty ||
         _experienceController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
             'Please fill all required fields (Name, Specialty, Experience).',
           ),
@@ -49,9 +49,9 @@ class _ExpertManagementTabState extends State<ExpertManagementTab> {
     try {
       await _adminDataService.addExpert(newExpert);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Expert added successfully!')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Expert added successfully!')));
         // Clear fields
         _nameController.clear();
         _specialtyController.clear();
@@ -72,9 +72,9 @@ class _ExpertManagementTabState extends State<ExpertManagementTab> {
     try {
       await _adminDataService.deleteExpert(id);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Expert deleted successfully!')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Expert deleted successfully!')));
       }
     } catch (e) {
       if (mounted) {
@@ -98,100 +98,145 @@ class _ExpertManagementTabState extends State<ExpertManagementTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSizes.paddingXLarge),
+      padding: EdgeInsets.all(AppSizes.paddingXLarge),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '+ Add New Expert',
-            style: AppTextStyles.heading2.copyWith(color: AppColors.black87),
+            style: AppTextStyles.heading2.copyWith(
+              color: AppColors.black87,
+              fontSize: 20,
+            ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _nameController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Enter expert name',
               labelText: 'Name',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _specialtyController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'e.g., Agronomy, Pest Control',
               labelText: 'Specialty',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _experienceController,
             maxLines: 2,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Enter years of experience or brief background',
               labelText: 'Experience',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _languagesController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'e.g., English, Sinhala (comma-separated)',
               labelText: 'Languages',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _ratingController,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Enter rating (e.g., 4.5)',
               labelText: 'Rating',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingXLarge),
+          SizedBox(height: AppSizes.paddingXLarge * 2),
           SizedBox(
             width: double.infinity,
+            height: 50,
             child: ElevatedButton.icon(
               onPressed: _addExpert,
-              icon: const Icon(Icons.add),
-              label: const Text('Add Expert'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primaryGreen,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    AppSizes.borderRadiusMedium,
+                  ),
+                ),
+              ),
+              icon: Icon(Icons.add, color: AppColors.white),
+              autofocus: true,
+              label: Text(
+                'Add Expert',
+                style: TextStyle(fontSize: 16, color: AppColors.white),
+              ),
             ),
           ),
-          const SizedBox(height: AppSizes.paddingXLarge),
-          Text(
-            'Existing Experts',
-            style: AppTextStyles.heading2.copyWith(color: AppColors.black87),
-          ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingXLarge),
+
+          SizedBox(height: AppSizes.paddingMedium),
           StreamBuilder<List<Expert>>(
             stream: _adminDataService.getExperts(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text('No experts added yet.'));
+                return Center(child: Text('No experts added yet.'));
               } else {
                 final experts = snapshot.data!;
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: experts.length,
                   itemBuilder: (context, index) {
                     final expert = experts[index];
                     return Card(
-                      margin: const EdgeInsets.symmetric(
+                      color: AppColors.grey50,
+                      margin: EdgeInsets.symmetric(
                         vertical: AppSizes.paddingSmall,
                       ),
-                      elevation: AppSizes.cardElevation,
+                      elevation: 0,
                       shape: RoundedRectangleBorder(
+                        side: BorderSide(color: AppColors.grey200),
                         borderRadius: BorderRadius.circular(
                           AppSizes.borderRadiusMedium,
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(AppSizes.paddingMedium),
+                        padding: EdgeInsets.all(AppSizes.paddingMedium),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -205,18 +250,21 @@ class _ExpertManagementTabState extends State<ExpertManagementTab> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  SizedBox(height: 10),
                                   Text(
                                     'Specialty: ${expert.specialty}',
                                     style: AppTextStyles.bodyMedium.copyWith(
                                       color: AppColors.grey600,
                                     ),
                                   ),
+                                  SizedBox(height: 2),
                                   Text(
                                     'Experience: ${expert.experience}',
                                     style: AppTextStyles.bodyMedium.copyWith(
                                       color: AppColors.grey600,
                                     ),
                                   ),
+                                  SizedBox(height: 5),
                                   if (expert.languages.isNotEmpty)
                                     Wrap(
                                       spacing: AppSizes.paddingSmall * 0.6,
@@ -226,7 +274,7 @@ class _ExpertManagementTabState extends State<ExpertManagementTab> {
                                                 (lang) => Chip(
                                                   label: Text(
                                                     lang,
-                                                    style: const TextStyle(
+                                                    style: TextStyle(
                                                       fontSize: 12,
                                                     ),
                                                   ),
@@ -242,6 +290,7 @@ class _ExpertManagementTabState extends State<ExpertManagementTab> {
                                               )
                                               .toList(),
                                     ),
+                                  SizedBox(height: 2),
                                   if (expert.rating > 0)
                                     Row(
                                       children: [
@@ -250,7 +299,7 @@ class _ExpertManagementTabState extends State<ExpertManagementTab> {
                                           color: AppColors.amber,
                                           size: 16,
                                         ),
-                                        const SizedBox(
+                                        SizedBox(
                                           width: AppSizes.paddingSmall * 0.6,
                                         ),
                                         Text('${expert.rating}'),
@@ -260,10 +309,7 @@ class _ExpertManagementTabState extends State<ExpertManagementTab> {
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(
-                                Icons.delete,
-                                color: AppColors.red,
-                              ),
+                              icon: Icon(Icons.delete, color: AppColors.red),
                               onPressed: () => _deleteExpert(expert.id!),
                             ),
                           ],

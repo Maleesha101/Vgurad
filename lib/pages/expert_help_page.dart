@@ -58,7 +58,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
         children: [
           Container(
             color: AppColors.lightGreenBackground,
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: AppSizes.paddingLarge,
               vertical: AppSizes.paddingMedium,
             ),
@@ -68,8 +68,8 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.arrow_back),
-                  label: const Text('Back'),
+                  icon: Icon(Icons.arrow_back),
+                  label: Text('Back'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.white,
                     foregroundColor: AppColors.black87,
@@ -80,19 +80,19 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                       side: BorderSide(color: AppColors.grey300),
                     ),
                     elevation: AppSizes.cardElevation,
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: AppSizes.paddingMedium,
                       vertical: AppSizes.paddingSmall + 4,
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSizes.horizontalSpacing),
-                const Text('Expert Help', style: AppTextStyles.pageHeaderTitle),
+                SizedBox(width: AppSizes.horizontalSpacing),
+                Text('Expert Help', style: AppTextStyles.pageHeaderTitle),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: AppSizes.paddingLarge,
               vertical: AppSizes.paddingSmall * 2,
             ),
@@ -133,7 +133,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
               ],
             ),
           ),
-          const SizedBox(height: AppSizes.paddingXXLarge),
+          SizedBox(height: AppSizes.paddingXXLarge),
           Expanded(
             child: TabBarView(
               controller: _tabController,
@@ -152,18 +152,18 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
   // --- Widget for the "Experts" tab, now fetching from Firebase ---
   Widget _buildAgriculturalExpertsTab() {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSizes.paddingLarge),
+      padding: EdgeInsets.all(AppSizes.paddingLarge),
       child: Center(
         child: Container(
-          constraints: const BoxConstraints(maxWidth: 1000),
+          constraints: BoxConstraints(maxWidth: 1000),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Available Agricultural Experts',
                 style: AppTextStyles.sectionTitle,
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               FutureBuilder<List<Expert>>(
                 future: _expertsFuture, // Use the Future that fetches data
                 builder: (context, snapshot) {
@@ -184,15 +184,14 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                   } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                     // Data loaded successfully
                     return LayoutBuilder(
-                      builder: (context, constraints) {
-                        int crossAxisCount =
-                            (constraints.maxWidth > 700) ? 2 : 1;
+                      builder: (context, raints) {
+                        int crossAxisCount = (raints.maxWidth > 700) ? 2 : 1;
                         double childAspectRatio =
-                            (constraints.maxWidth > 700) ? 1.5 : 1.2;
+                            (raints.maxWidth > 700) ? 1.5 : 1.2;
 
                         return GridView.builder(
                           shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
+                          physics: NeverScrollableScrollPhysics(),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: crossAxisCount,
@@ -216,7 +215,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                     );
                   } else {
                     // No data found or empty list
-                    return const Center(
+                    return Center(
                       child: Text('No agricultural experts found.'),
                     );
                   }
@@ -232,7 +231,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
   // --- Widget for the "Ask Question" tab ---
   Widget _buildAskQuestionTab() {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSizes.paddingLarge),
+      padding: EdgeInsets.all(AppSizes.paddingLarge),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -242,7 +241,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
               borderRadius: BorderRadius.circular(AppSizes.borderRadiusMedium),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(AppSizes.paddingLarge),
+              padding: EdgeInsets.all(AppSizes.paddingLarge),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -254,7 +253,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                       color: AppColors.black87,
                     ),
                   ),
-                  const SizedBox(height: AppSizes.paddingLarge),
+                  SizedBox(height: AppSizes.paddingLarge),
                   Text(
                     'Your Question',
                     style: TextStyle(
@@ -263,7 +262,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                       color: AppColors.grey700,
                     ),
                   ),
-                  const SizedBox(height: AppSizes.paddingSmall),
+                  SizedBox(height: AppSizes.paddingSmall),
                   TextField(
                     maxLines: 5,
                     decoration: InputDecoration(
@@ -291,7 +290,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                       ),
                     ),
                   ),
-                  const SizedBox(height: AppSizes.paddingLarge),
+                  SizedBox(height: AppSizes.paddingLarge),
                   Text(
                     'Attach Photo (Optional)',
                     style: TextStyle(
@@ -300,7 +299,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                       color: AppColors.grey700,
                     ),
                   ),
-                  const SizedBox(height: AppSizes.paddingSmall),
+                  SizedBox(height: AppSizes.paddingSmall),
                   Container(
                     height: 150,
                     decoration: BoxDecoration(
@@ -322,7 +321,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                             size: AppSizes.iconSizeLarge,
                             color: AppColors.grey600,
                           ),
-                          const SizedBox(height: AppSizes.paddingSmall),
+                          SizedBox(height: AppSizes.paddingSmall),
                           Text(
                             'Click to upload photo',
                             style: TextStyle(color: AppColors.grey600),
@@ -331,7 +330,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                       ),
                     ),
                   ),
-                  const SizedBox(height: AppSizes.paddingLarge),
+                  SizedBox(height: AppSizes.paddingLarge),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(
@@ -342,7 +341,7 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryGreen,
                         foregroundColor: AppColors.white,
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           vertical: AppSizes.paddingMedium,
                         ),
                         shape: RoundedRectangleBorder(
@@ -351,8 +350,8 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
                           ),
                         ),
                       ),
-                      icon: const Icon(Icons.send),
-                      label: const Text('Submit Question'),
+                      icon: Icon(Icons.send),
+                      label: Text('Submit Question'),
                     ),
                   ),
                 ],
@@ -366,6 +365,6 @@ class _ExpertHelpPageState extends State<ExpertHelpPage>
 
   // --- Widget for the "My Questions" tab ---
   Widget _buildMyQuestionsTab() {
-    return const Center(child: Text('My Questions Content Here'));
+    return Center(child: Text('My Questions Content Here'));
   }
 }

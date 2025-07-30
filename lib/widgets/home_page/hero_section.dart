@@ -12,9 +12,10 @@ class HeroSection extends StatelessWidget {
 
     return Column(
       children: [
-        SizedBox(height: 15),
+        SizedBox(height: 20),
         Container(
           width: screenWidth * 0.98,
+          height: screenWidth < 600 ? 250 : 300,
           padding: EdgeInsets.symmetric(
             vertical: AppSizes.paddingHeroVertical,
             horizontal: screenWidth * 0.05,
@@ -49,7 +50,7 @@ class HeroSection extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Protect Your Crops with AI',
                       style: AppTextStyles.heroTitle,
                     ),
@@ -58,11 +59,11 @@ class HeroSection extends StatelessWidget {
                       'Detect diseases early, get expert treatment advice, and keep your farm healthy with Vguard\'s intelligent crop protection system.',
                       style: AppTextStyles.heroDescription,
                     ),
-                    const SizedBox(height: AppSizes.paddingXXLarge),
+                    SizedBox(height: AppSizes.paddingXXLarge),
                     Wrap(
                       spacing: AppSizes.paddingSmall + 4,
                       runSpacing: AppSizes.paddingSmall + 4,
-                      children: const [
+                      children: [
                         PillButton(
                           text: 'AI Disease Detection',
                           icon: Icons.lightbulb_outline,
@@ -90,12 +91,12 @@ class HeroSection extends StatelessWidget {
           child: GridView.count(
             crossAxisCount: screenWidth < 600 ? 2 : 4,
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             childAspectRatio:
                 screenWidth < 600 ? 1.8 : 2.2, // Made taller for small screens
             crossAxisSpacing: AppSizes.horizontalSpacing,
             mainAxisSpacing: AppSizes.horizontalSpacing,
-            children: const [
+            children: [
               StatCard(value: '50+', label: 'Diseases Detected'),
               StatCard(value: '1000+', label: 'Farmers Helped'),
               StatCard(

@@ -30,9 +30,9 @@ class _LoginPopupState extends State<LoginPopup> {
       );
       if (mounted) {
         Navigator.of(context).pop(); // Close the popup on successful login
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Logged in successfully!')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Logged in successfully!')));
       }
     } catch (e) {
       setState(() {
@@ -59,7 +59,7 @@ class _LoginPopupState extends State<LoginPopup> {
       if (mounted) {
         Navigator.of(context).pop(); // Close the popup on successful login
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Cannot sign in with Google yet')),
+          SnackBar(content: Text('Cannot sign in with Google yet')),
         );
       }
     } catch (e) {
@@ -78,7 +78,7 @@ class _LoginPopupState extends State<LoginPopup> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const SignUpPopup(); // Show the signup popup
+        return SignUpPopup(); // Show the signup popup
       },
     );
   }
@@ -93,7 +93,7 @@ class _LoginPopupState extends State<LoginPopup> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 100),
+      insetPadding: EdgeInsets.symmetric(horizontal: 100),
       backgroundColor: AppColors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSizes.borderRadiusLarge),
@@ -101,7 +101,7 @@ class _LoginPopupState extends State<LoginPopup> {
       child: Container(
         width: 450,
         height: 530,
-        padding: const EdgeInsets.all(AppSizes.paddingXLarge),
+        padding: EdgeInsets.all(AppSizes.paddingXLarge),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -113,7 +113,7 @@ class _LoginPopupState extends State<LoginPopup> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ),
-              const Text(
+              Text(
                 'Welcome Back',
                 style: TextStyle(
                   fontSize: 24,
@@ -122,13 +122,13 @@ class _LoginPopupState extends State<LoginPopup> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               Text(
                 'Sign in to your account to continue',
                 style: TextStyle(fontSize: 16, color: AppColors.grey600),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: AppSizes.paddingXLarge),
+              SizedBox(height: AppSizes.paddingXLarge),
               SizedBox(
                 width: double.infinity,
                 height: 45,
@@ -138,7 +138,7 @@ class _LoginPopupState extends State<LoginPopup> {
                     backgroundColor: AppColors.white,
                     foregroundColor: AppColors.black87,
                     side: BorderSide(color: AppColors.grey300),
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       vertical: AppSizes.paddingMedium,
                     ),
                     shape: RoundedRectangleBorder(
@@ -149,13 +149,13 @@ class _LoginPopupState extends State<LoginPopup> {
                     elevation: 1,
                   ),
                   icon: Image.asset('assets/icons/google_logo.png', height: 24),
-                  label: const Text(
+                  label: Text(
                     'Continue with Google',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               Text(
                 'OR CONTINUE WITH',
                 style: TextStyle(
@@ -164,7 +164,7 @@ class _LoginPopupState extends State<LoginPopup> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
@@ -183,13 +183,13 @@ class _LoginPopupState extends State<LoginPopup> {
                       color: AppColors.white70.withOpacity(0.1),
                     ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
+                  contentPadding: EdgeInsets.symmetric(
                     vertical: AppSizes.paddingMedium,
                   ),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
@@ -208,7 +208,7 @@ class _LoginPopupState extends State<LoginPopup> {
                       color: AppColors.white70.withOpacity(0.1),
                     ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
+                  contentPadding: EdgeInsets.symmetric(
                     vertical: AppSizes.paddingMedium,
                   ),
                 ),
@@ -216,13 +216,13 @@ class _LoginPopupState extends State<LoginPopup> {
               ),
               if (_errorMessage != null)
                 Padding(
-                  padding: const EdgeInsets.only(top: AppSizes.paddingSmall),
+                  padding: EdgeInsets.only(top: AppSizes.paddingSmall),
                   child: Text(
                     _errorMessage!,
-                    style: const TextStyle(color: AppColors.red, fontSize: 13),
+                    style: TextStyle(color: AppColors.red, fontSize: 13),
                   ),
                 ),
-              const SizedBox(height: AppSizes.paddingXLarge),
+              SizedBox(height: AppSizes.paddingXLarge),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
@@ -230,7 +230,7 @@ class _LoginPopupState extends State<LoginPopup> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryGreen,
                     foregroundColor: AppColors.white,
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       vertical: AppSizes.paddingMedium,
                     ),
                     shape: RoundedRectangleBorder(
@@ -242,7 +242,7 @@ class _LoginPopupState extends State<LoginPopup> {
                   ),
                   icon:
                       _isLoading
-                          ? const SizedBox(
+                          ? SizedBox(
                             width: 16,
                             height: 16,
                             child: CircularProgressIndicator(
@@ -250,17 +250,14 @@ class _LoginPopupState extends State<LoginPopup> {
                               strokeWidth: 2,
                             ),
                           )
-                          : const Icon(Icons.login),
+                          : Icon(Icons.login),
                   label: Text(
                     _isLoading ? 'Signing In...' : 'Sign In',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               TextButton(
                 onPressed:
                     _isLoading

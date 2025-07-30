@@ -76,11 +76,13 @@ class _FarmingConditionsSectionState extends State<FarmingConditionsSection> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Center(
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 1200),
-        margin: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
-        padding: const EdgeInsets.all(AppSizes.paddingXLarge),
+        height: screenHeight * 0.33,
+        constraints: BoxConstraints(maxWidth: 1200),
+        margin: EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+        padding: EdgeInsets.all(AppSizes.paddingXLarge),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [AppColors.grey100, AppColors.lightGreenAccent],
@@ -96,9 +98,12 @@ class _FarmingConditionsSectionState extends State<FarmingConditionsSection> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   'Today\'s Farming Conditions',
-                  style: AppTextStyles.sectionTitle,
+                  style: AppTextStyles.sectionTitle.copyWith(
+                    color: AppColors.black87,
+                    fontSize: 18,
+                  ),
                 ),
                 // For the 'Optimal' tag to show dynamic status
                 FutureBuilder<WeatherData>(
@@ -125,7 +130,9 @@ class _FarmingConditionsSectionState extends State<FarmingConditionsSection> {
                       statusColor = AppColors.red;
                     }
                     return Container(
-                      padding: const EdgeInsets.symmetric(
+                      width: 70,
+                      height: 25,
+                      padding: EdgeInsets.symmetric(
                         horizontal: AppSizes.paddingSmall + 4,
                         vertical: AppSizes.paddingSmall - 2,
                       ),
@@ -136,15 +143,17 @@ class _FarmingConditionsSectionState extends State<FarmingConditionsSection> {
                           colors: [statusColor, statusColor.withOpacity(0.7)],
                         ),
                         borderRadius: BorderRadius.circular(
-                          AppSizes.borderRadiusLarge * 0.75,
+                          AppSizes.borderRadiusLarge * 0.5,
                         ),
                       ),
-                      child: Text(
-                        status,
-                        style: const TextStyle(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                      child: Center(
+                        child: Text(
+                          status,
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10,
+                          ),
                         ),
                       ),
                     );
@@ -152,7 +161,7 @@ class _FarmingConditionsSectionState extends State<FarmingConditionsSection> {
                 ),
               ],
             ),
-            const SizedBox(height: AppSizes.paddingXLarge),
+            SizedBox(height: AppSizes.paddingXLarge),
             FutureBuilder<WeatherData>(
               future: _weatherFuture,
               builder: (context, snapshot) {
@@ -171,22 +180,22 @@ class _FarmingConditionsSectionState extends State<FarmingConditionsSection> {
                         const Icon(
                           Icons.error_outline,
                           color: AppColors.red,
-                          size: 40,
+                          size: 30,
                         ),
                         const SizedBox(height: AppSizes.paddingSmall),
                         Text(
-                          'Failed to load weather: \n${snapshot.error}',
+                          'Failed to load weather',
                           textAlign: TextAlign.center,
-                          style: const TextStyle(color: AppColors.black87),
+                          style: TextStyle(color: AppColors.black87),
                         ),
-                        const SizedBox(height: AppSizes.paddingSmall),
+                        SizedBox(height: AppSizes.paddingSmall / 2),
                         ElevatedButton(
                           onPressed: _refreshWeather,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.darkGreen,
                             foregroundColor: AppColors.white,
                           ),
-                          child: const Text('Retry'),
+                          child: Text('Retry'),
                         ),
                       ],
                     ),
@@ -240,15 +249,15 @@ class _FarmingConditionsSectionState extends State<FarmingConditionsSection> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('No weather data available.'),
-                        const SizedBox(height: AppSizes.paddingSmall),
+                        Text('No weather data available.'),
+                        SizedBox(height: AppSizes.paddingSmall),
                         ElevatedButton(
                           onPressed: _refreshWeather,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.darkGreen,
                             foregroundColor: AppColors.white,
                           ),
-                          child: const Text('Load Weather'),
+                          child: Text('Load Weather'),
                         ),
                       ],
                     ),
@@ -279,19 +288,20 @@ class ConditionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        Icon(icon, size: AppSizes.iconSizeXXLarge, color: iconColor),
-        const SizedBox(height: AppSizes.paddingSmall),
+        Icon(icon, size: screenHeight * 0.04, color: iconColor),
+        SizedBox(height: AppSizes.paddingSmall),
         Text(
           value,
-          style: const TextStyle(
-            fontSize: 18,
+          style: TextStyle(
+            fontSize: 15,
             fontWeight: FontWeight.bold,
             color: AppColors.black87,
           ),
         ),
-        const SizedBox(height: AppSizes.borderRadiusSmall),
+        SizedBox(height: AppSizes.borderRadiusSmall),
         Text(label, style: TextStyle(fontSize: 14, color: AppColors.grey600)),
       ],
     );

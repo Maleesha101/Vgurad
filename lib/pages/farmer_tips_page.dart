@@ -65,7 +65,7 @@ class _FarmerTipsPageState extends State<FarmerTipsPage> {
         children: [
           Container(
             color: AppColors.lightGreenBackground,
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: AppSizes.paddingLarge,
               vertical: AppSizes.paddingMedium,
             ),
@@ -75,8 +75,8 @@ class _FarmerTipsPageState extends State<FarmerTipsPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.arrow_back),
-                  label: const Text('Back'),
+                  icon: Icon(Icons.arrow_back),
+                  label: Text('Back'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.white,
                     foregroundColor: AppColors.black87,
@@ -87,14 +87,14 @@ class _FarmerTipsPageState extends State<FarmerTipsPage> {
                       side: BorderSide(color: AppColors.grey300),
                     ),
                     elevation: AppSizes.cardElevation,
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: AppSizes.paddingMedium,
                       vertical: AppSizes.paddingSmall + 4,
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSizes.horizontalSpacing),
-                const Text(
+                SizedBox(width: AppSizes.horizontalSpacing),
+                Text(
                   'Farmer Tips & Advice',
                   style: AppTextStyles.pageHeaderTitle,
                 ),
@@ -103,18 +103,15 @@ class _FarmerTipsPageState extends State<FarmerTipsPage> {
           ),
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(AppSizes.paddingLarge),
+              padding: EdgeInsets.all(AppSizes.paddingLarge),
               child: Center(
                 child: Container(
-                  constraints: const BoxConstraints(maxWidth: 1000),
+                  constraints: BoxConstraints(maxWidth: 1000),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Weather Alerts',
-                        style: AppTextStyles.sectionTitle,
-                      ),
-                      const SizedBox(height: AppSizes.paddingMedium),
+                      Text('Weather Alerts', style: AppTextStyles.sectionTitle),
+                      SizedBox(height: AppSizes.paddingMedium),
                       Card(
                         elevation: AppSizes.cardElevation,
                         color: AppColors.yellowBackground,
@@ -125,7 +122,7 @@ class _FarmerTipsPageState extends State<FarmerTipsPage> {
                           side: BorderSide(color: AppColors.amber200),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(AppSizes.paddingLarge),
+                          padding: EdgeInsets.all(AppSizes.paddingLarge),
                           child: Column(
                             children: [
                               WeatherAlertItem(
@@ -151,13 +148,13 @@ class _FarmerTipsPageState extends State<FarmerTipsPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: AppSizes.paddingXXLarge),
+                      SizedBox(height: AppSizes.paddingXXLarge),
 
-                      const Text(
+                      Text(
                         'Filter by Category',
                         style: AppTextStyles.sectionTitle,
                       ),
-                      const SizedBox(height: AppSizes.paddingMedium),
+                      SizedBox(height: AppSizes.paddingMedium),
                       Wrap(
                         spacing: AppSizes.paddingSmall + 2,
                         runSpacing: AppSizes.paddingSmall + 2,
@@ -196,7 +193,7 @@ class _FarmerTipsPageState extends State<FarmerTipsPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: AppSizes.paddingXXLarge),
+                      SizedBox(height: AppSizes.paddingXXLarge),
 
                       FutureBuilder<List<FarmerTip>>(
                         future: _farmerTipsFuture,
@@ -220,15 +217,15 @@ class _FarmerTipsPageState extends State<FarmerTipsPage> {
                               snapshot.data!.isNotEmpty) {
                             // Data loaded successfully
                             return LayoutBuilder(
-                              builder: (context, constraints) {
+                              builder: (context, raints) {
                                 int crossAxisCount =
-                                    (constraints.maxWidth > 600) ? 2 : 1;
+                                    (raints.maxWidth > 600) ? 2 : 1;
                                 double childAspectRatio =
-                                    (constraints.maxWidth > 600) ? 1.0 : 1.0;
+                                    (raints.maxWidth > 600) ? 1.0 : 1.0;
 
                                 return GridView.builder(
                                   shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
+                                  physics: NeverScrollableScrollPhysics(),
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: crossAxisCount,
@@ -300,7 +297,7 @@ class _FarmerTipsPageState extends State<FarmerTipsPage> {
                             );
                           } else {
                             // No data found or empty list
-                            return const Center(
+                            return Center(
                               child: Text(
                                 'No farmer tips found for this category.',
                               ),

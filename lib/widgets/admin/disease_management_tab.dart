@@ -26,7 +26,7 @@ class _DiseaseManagementTabState extends State<DiseaseManagementTab> {
         _preventionController.text.isEmpty ||
         _categoryController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
             'Please fill all required fields (Name, Symptoms, Treatment, Prevention, Category).',
           ),
@@ -50,9 +50,9 @@ class _DiseaseManagementTabState extends State<DiseaseManagementTab> {
     try {
       await _adminDataService.addDisease(newDisease);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Disease added successfully!')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Disease added successfully!')));
         // Clear fields
         _nameController.clear();
         _symptomsController.clear();
@@ -75,7 +75,7 @@ class _DiseaseManagementTabState extends State<DiseaseManagementTab> {
       await _adminDataService.deleteDisease(id);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Disease deleted successfully!')),
+          SnackBar(content: Text('Disease deleted successfully!')),
         );
       }
     } catch (e) {
@@ -101,117 +101,169 @@ class _DiseaseManagementTabState extends State<DiseaseManagementTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSizes.paddingXLarge),
+      padding: EdgeInsets.all(AppSizes.paddingXLarge),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '+ Add New Disease',
-            style: AppTextStyles.heading2.copyWith(color: AppColors.black87),
+            style: AppTextStyles.heading2.copyWith(
+              color: AppColors.black87,
+              fontSize: 20,
+            ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _nameController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Enter disease name',
               labelText: 'Disease Name',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _categoryController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'e.g., Fungal, Bacterial, Viral',
               labelText: 'Category',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _symptomsController,
             maxLines: 3,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Describe symptoms',
               labelText: 'Symptoms',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _treatmentController,
             maxLines: 3,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Describe treatment options',
               labelText: 'Treatment',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _preventionController,
             maxLines: 3,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Describe prevention methods',
               labelText: 'Prevention',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _imageUrlController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Optional: Enter image URL',
               labelText: 'Image URL',
             ),
             keyboardType: TextInputType.url,
           ),
-          const SizedBox(height: AppSizes.paddingXLarge),
+          SizedBox(height: AppSizes.paddingXLarge * 2),
           SizedBox(
             width: double.infinity,
+            height: 50,
             child: ElevatedButton.icon(
               onPressed: _addDisease,
-              icon: const Icon(Icons.add),
-              label: const Text('Add Disease'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primaryGreen,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    AppSizes.borderRadiusMedium,
+                  ),
+                ),
+              ),
+              icon: Icon(Icons.add, color: AppColors.white),
+              autofocus: true,
+              label: Text(
+                'Add Disease',
+                style: TextStyle(fontSize: 16, color: AppColors.white),
+              ),
             ),
           ),
-          const SizedBox(height: AppSizes.paddingXLarge),
-          Text(
-            'Existing Diseases',
-            style: AppTextStyles.heading2.copyWith(color: AppColors.black87),
-          ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingXLarge),
+
+          SizedBox(height: AppSizes.paddingMedium),
           StreamBuilder<List<Disease>>(
             stream: _adminDataService.getDiseases(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text('No diseases added yet.'));
+                return Center(child: Text('No diseases added yet.'));
               } else {
                 final diseases = snapshot.data!;
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: diseases.length,
                   itemBuilder: (context, index) {
                     final disease = diseases[index];
                     return Card(
-                      margin: const EdgeInsets.symmetric(
+                      color: AppColors.grey50,
+                      margin: EdgeInsets.symmetric(
                         vertical: AppSizes.paddingSmall,
                       ),
-                      elevation: AppSizes.cardElevation,
+                      elevation: 0,
+
                       shape: RoundedRectangleBorder(
+                        side: BorderSide(color: AppColors.grey200),
                         borderRadius: BorderRadius.circular(
                           AppSizes.borderRadiusMedium,
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(AppSizes.paddingMedium),
+                        padding: EdgeInsets.all(AppSizes.paddingMedium),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             if (disease.imageUrl != null &&
                                 disease.imageUrl!.isNotEmpty)
                               Padding(
-                                padding: const EdgeInsets.only(
+                                padding: EdgeInsets.only(
                                   right: AppSizes.paddingMedium,
                                 ),
                                 child: ClipRRect(
@@ -244,7 +296,7 @@ class _DiseaseManagementTabState extends State<DiseaseManagementTab> {
                                   ),
                                   SizedBox(height: AppSizes.paddingSmall),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                       horizontal: AppSizes.paddingSmall,
                                       vertical: 2,
                                     ),
@@ -264,7 +316,7 @@ class _DiseaseManagementTabState extends State<DiseaseManagementTab> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: AppSizes.paddingSmall),
+                                  SizedBox(height: AppSizes.paddingSmall),
                                   Text(
                                     'Symptoms: ${disease.symptoms}',
                                     style: AppTextStyles.bodyMedium.copyWith(
@@ -273,6 +325,7 @@ class _DiseaseManagementTabState extends State<DiseaseManagementTab> {
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
+                                  SizedBox(height: 2),
                                   Text(
                                     'Treatment: ${disease.treatment}',
                                     style: AppTextStyles.bodyMedium.copyWith(
@@ -281,6 +334,7 @@ class _DiseaseManagementTabState extends State<DiseaseManagementTab> {
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
+                                  SizedBox(height: 2),
                                   Text(
                                     'Prevention: ${disease.prevention}',
                                     style: AppTextStyles.bodyMedium.copyWith(
@@ -293,10 +347,7 @@ class _DiseaseManagementTabState extends State<DiseaseManagementTab> {
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(
-                                Icons.delete,
-                                color: AppColors.red,
-                              ),
+                              icon: Icon(Icons.delete, color: AppColors.red),
                               onPressed: () => _deleteDisease(disease.id!),
                             ),
                           ],

@@ -18,25 +18,25 @@ class WeatherAlertItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSizes.paddingSmall),
+      padding: EdgeInsets.symmetric(vertical: AppSizes.paddingSmall),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, size: AppSizes.iconSizeLarge, color: iconColor),
-          const SizedBox(width: AppSizes.paddingMedium),
+          SizedBox(width: AppSizes.paddingMedium),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: AppColors.black87,
                   ),
                 ),
-                const SizedBox(height: AppSizes.borderRadiusSmall + 1),
+                SizedBox(height: AppSizes.borderRadiusSmall + 1),
                 Text(
                   description,
                   style: TextStyle(fontSize: 15, color: AppColors.grey700),

@@ -27,7 +27,7 @@ class ExpertCard extends StatelessWidget {
       ),
       color: AppColors.white,
       child: Padding(
-        padding: const EdgeInsets.all(AppSizes.paddingLarge),
+        padding: EdgeInsets.all(AppSizes.paddingLarge),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,7 +37,7 @@ class ExpertCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: AppColors.black87,
@@ -51,8 +51,8 @@ class ExpertCard extends StatelessWidget {
                       rating.toStringAsFixed(1),
                       style: TextStyle(fontSize: 15, color: AppColors.grey700),
                     ),
-                    const SizedBox(width: AppSizes.borderRadiusSmall),
-                    const Icon(
+                    SizedBox(width: AppSizes.borderRadiusSmall),
+                    Icon(
                       Icons.star,
                       color: AppColors.amber,
                       size: AppSizes.iconSizeSmall,
@@ -61,7 +61,7 @@ class ExpertCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSizes.paddingSmall),
+            SizedBox(height: AppSizes.paddingSmall),
             Text(
               specialty,
               style: TextStyle(
@@ -70,13 +70,13 @@ class ExpertCard extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: AppSizes.borderRadiusSmall),
+            SizedBox(height: AppSizes.borderRadiusSmall),
             Text(
               experience,
               style: TextStyle(fontSize: 14, color: AppColors.grey600),
             ),
-            const SizedBox(height: AppSizes.paddingSmall + 4),
-            const Text(
+            SizedBox(height: AppSizes.paddingSmall + 4),
+            Text(
               'Languages:',
               style: TextStyle(
                 fontSize: 14,
@@ -84,7 +84,7 @@ class ExpertCard extends StatelessWidget {
                 color: AppColors.black87,
               ),
             ),
-            const SizedBox(height: AppSizes.paddingSmall),
+            SizedBox(height: AppSizes.paddingSmall),
             Wrap(
               spacing: AppSizes.paddingSmall,
               runSpacing: AppSizes.paddingSmall,
@@ -92,7 +92,7 @@ class ExpertCard extends StatelessWidget {
                   languages
                       .map(
                         (lang) => Container(
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: AppSizes.paddingSmall + 2,
                             vertical: AppSizes.borderRadiusSmall + 1,
                           ),
@@ -114,7 +114,7 @@ class ExpertCard extends StatelessWidget {
                       )
                       .toList(),
             ),
-            const Spacer(),
+            Spacer(),
             Row(
               children: [
                 Expanded(
@@ -125,7 +125,7 @@ class ExpertCard extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryGreen,
                       foregroundColor: AppColors.white,
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         vertical: AppSizes.paddingMedium - 2,
                       ),
                       shape: RoundedRectangleBorder(
@@ -135,10 +135,10 @@ class ExpertCard extends StatelessWidget {
                       ),
                       elevation: AppSizes.cardElevation,
                     ),
-                    child: const Text('Call Now'),
+                    child: Text('Call Now'),
                   ),
                 ),
-                const SizedBox(width: AppSizes.paddingSmall + 2),
+                SizedBox(width: AppSizes.paddingSmall + 2),
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
@@ -146,8 +146,8 @@ class ExpertCard extends StatelessWidget {
                     },
                     style: OutlinedButton.styleFrom(
                       foregroundColor: AppColors.primaryGreen,
-                      side: const BorderSide(color: AppColors.primaryGreen),
-                      padding: const EdgeInsets.symmetric(
+                      side: BorderSide(color: AppColors.primaryGreen),
+                      padding: EdgeInsets.symmetric(
                         vertical: AppSizes.paddingMedium - 2,
                       ),
                       shape: RoundedRectangleBorder(
@@ -156,7 +156,7 @@ class ExpertCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const Text('Chat'),
+                    child: Text('Chat'),
                   ),
                 ),
               ],

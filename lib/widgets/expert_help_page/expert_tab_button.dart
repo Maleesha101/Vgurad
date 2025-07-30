@@ -20,9 +20,7 @@ class ExpertTabButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppSizes.paddingSmall + 4,
-        ),
+        padding: EdgeInsets.symmetric(vertical: AppSizes.paddingSmall + 4),
         decoration: BoxDecoration(
           color:
               isSelected
@@ -39,7 +37,7 @@ class ExpertTabButton extends StatelessWidget {
               color: isSelected ? AppColors.primaryGreen : AppColors.black87,
               size: AppSizes.iconSizeMedium,
             ),
-            const SizedBox(width: AppSizes.paddingSmall),
+            SizedBox(width: AppSizes.paddingSmall),
             Text(
               label,
               style: TextStyle(

@@ -28,7 +28,7 @@ class DiseaseItemCard extends StatelessWidget {
       ),
       color: AppColors.white,
       child: Padding(
-        padding: const EdgeInsets.all(AppSizes.paddingLarge),
+        padding: EdgeInsets.all(AppSizes.paddingLarge),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,14 +37,14 @@ class DiseaseItemCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: AppColors.black87,
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: AppSizes.paddingSmall,
                     vertical: AppSizes.borderRadiusSmall,
                   ),
@@ -65,7 +65,7 @@ class DiseaseItemCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSizes.paddingSmall),
+            SizedBox(height: AppSizes.paddingSmall),
             Row(
               children: [
                 Icon(
@@ -73,21 +73,21 @@ class DiseaseItemCard extends StatelessWidget {
                   size: AppSizes.paddingMedium,
                   color: AppColors.grey600,
                 ),
-                const SizedBox(width: AppSizes.borderRadiusSmall + 1),
+                SizedBox(width: AppSizes.borderRadiusSmall + 1),
                 Text(
                   crop,
                   style: TextStyle(fontSize: 15, color: AppColors.grey700),
                 ),
               ],
             ),
-            const SizedBox(height: AppSizes.paddingSmall),
+            SizedBox(height: AppSizes.paddingSmall),
             Text(
               description,
               style: TextStyle(fontSize: 15, color: AppColors.grey700),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            const Spacer(),
+            Spacer(),
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
@@ -116,8 +116,8 @@ class DiseaseItemCard extends StatelessWidget {
                 },
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.primaryGreen,
-                  side: const BorderSide(color: AppColors.primaryGreen),
-                  padding: const EdgeInsets.symmetric(
+                  side: BorderSide(color: AppColors.primaryGreen),
+                  padding: EdgeInsets.symmetric(
                     vertical: AppSizes.paddingMedium - 2,
                   ),
                   shape: RoundedRectangleBorder(
@@ -126,10 +126,7 @@ class DiseaseItemCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: const Text(
-                  'View Details',
-                  style: TextStyle(fontSize: 15),
-                ),
+                child: Text('View Details', style: TextStyle(fontSize: 15)),
               ),
             ),
           ],

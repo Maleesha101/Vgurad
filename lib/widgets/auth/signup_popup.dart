@@ -36,7 +36,7 @@ class _SignUpPopupState extends State<SignUpPopup> {
       if (mounted) {
         Navigator.of(context).pop(); // Close the popup on successful sign-up
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Account created successfully!')),
+          SnackBar(content: Text('Account created successfully!')),
         );
       }
     } catch (e) {
@@ -64,7 +64,7 @@ class _SignUpPopupState extends State<SignUpPopup> {
       if (mounted) {
         Navigator.of(context).pop(); // Close the popup on successful sign-up
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Signed up with Google successfully!')),
+          SnackBar(content: Text('Signed up with Google successfully!')),
         );
       }
     } catch (e) {
@@ -96,7 +96,7 @@ class _SignUpPopupState extends State<SignUpPopup> {
       child: Container(
         width: 450,
         height: 580,
-        padding: const EdgeInsets.all(AppSizes.paddingXLarge),
+        padding: EdgeInsets.all(AppSizes.paddingXLarge),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -108,7 +108,7 @@ class _SignUpPopupState extends State<SignUpPopup> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ),
-              const Text(
+              Text(
                 'Create Account',
                 style: TextStyle(
                   fontSize: 24,
@@ -117,13 +117,13 @@ class _SignUpPopupState extends State<SignUpPopup> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               Text(
                 'Create a new account to get started',
                 style: TextStyle(fontSize: 16, color: AppColors.grey600),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: AppSizes.paddingXLarge),
+              SizedBox(height: AppSizes.paddingXLarge),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
@@ -132,7 +132,7 @@ class _SignUpPopupState extends State<SignUpPopup> {
                     backgroundColor: AppColors.white,
                     foregroundColor: AppColors.black87,
                     side: BorderSide(color: AppColors.grey300),
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       vertical: AppSizes.paddingMedium,
                     ),
                     shape: RoundedRectangleBorder(
@@ -146,13 +146,13 @@ class _SignUpPopupState extends State<SignUpPopup> {
                     'assets/icons/google_logo.png',
                     height: 24,
                   ), // Re-use Google logo
-                  label: const Text(
+                  label: Text(
                     'Continue with Google',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               Text(
                 'OR CONTINUE WITH',
                 style: TextStyle(
@@ -161,7 +161,7 @@ class _SignUpPopupState extends State<SignUpPopup> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               TextField(
                 controller: _fullNameController,
                 decoration: InputDecoration(
@@ -178,12 +178,12 @@ class _SignUpPopupState extends State<SignUpPopup> {
                     ),
                     borderSide: BorderSide.none,
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
+                  contentPadding: EdgeInsets.symmetric(
                     vertical: AppSizes.paddingMedium,
                   ),
                 ),
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
@@ -200,13 +200,13 @@ class _SignUpPopupState extends State<SignUpPopup> {
                     ),
                     borderSide: BorderSide.none,
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
+                  contentPadding: EdgeInsets.symmetric(
                     vertical: AppSizes.paddingMedium,
                   ),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
@@ -223,7 +223,7 @@ class _SignUpPopupState extends State<SignUpPopup> {
                     ),
                     borderSide: BorderSide.none,
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
+                  contentPadding: EdgeInsets.symmetric(
                     vertical: AppSizes.paddingMedium,
                   ),
                 ),
@@ -231,13 +231,13 @@ class _SignUpPopupState extends State<SignUpPopup> {
               ),
               if (_errorMessage != null)
                 Padding(
-                  padding: const EdgeInsets.only(top: AppSizes.paddingSmall),
+                  padding: EdgeInsets.only(top: AppSizes.paddingSmall),
                   child: Text(
                     _errorMessage!,
-                    style: const TextStyle(color: AppColors.red, fontSize: 13),
+                    style: TextStyle(color: AppColors.red, fontSize: 13),
                   ),
                 ),
-              const SizedBox(height: AppSizes.paddingXLarge),
+              SizedBox(height: AppSizes.paddingXLarge),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
@@ -245,7 +245,7 @@ class _SignUpPopupState extends State<SignUpPopup> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryGreen,
                     foregroundColor: AppColors.white,
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       vertical: AppSizes.paddingMedium,
                     ),
                     shape: RoundedRectangleBorder(
@@ -257,7 +257,7 @@ class _SignUpPopupState extends State<SignUpPopup> {
                   ),
                   icon:
                       _isLoading
-                          ? const SizedBox(
+                          ? SizedBox(
                             width: 16,
                             height: 16,
                             child: CircularProgressIndicator(
@@ -265,17 +265,14 @@ class _SignUpPopupState extends State<SignUpPopup> {
                               strokeWidth: 2,
                             ),
                           )
-                          : const Icon(Icons.person_add_alt_1),
+                          : Icon(Icons.person_add_alt_1),
                   label: Text(
                     _isLoading ? 'Creating Account...' : 'Create Account',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
-              const SizedBox(height: AppSizes.paddingMedium),
+              SizedBox(height: AppSizes.paddingMedium),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(); // Close signup popup

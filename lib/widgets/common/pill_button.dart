@@ -10,7 +10,7 @@ class PillButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         horizontal: AppSizes.paddingMedium,
         vertical: AppSizes.paddingSmall,
       ),
@@ -26,10 +26,10 @@ class PillButton extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, color: AppColors.white, size: AppSizes.iconSizeSmall),
-          const SizedBox(width: AppSizes.paddingSmall),
+          SizedBox(width: AppSizes.paddingSmall),
           Text(
             text,
-            style: const TextStyle(
+            style: TextStyle(
               color: AppColors.white,
               fontSize: AppSizes.paddingMedium,
             ),

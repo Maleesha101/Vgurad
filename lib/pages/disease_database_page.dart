@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:vguard/core/app_constants.dart';
-import 'package:vguard/models/disease.dart'; // Import your Disease model
-import 'package:vguard/services/disease_service.dart'; // Import your DiseaseService
+import 'package:vguard/models/disease.dart';
+import 'package:vguard/services/disease_service.dart';
 import 'package:vguard/widgets/disease_database_page/disease_item_card.dart';
 
 class DiseaseDatabasePage extends StatefulWidget {
@@ -74,7 +74,7 @@ class _DiseaseDatabasePageState extends State<DiseaseDatabasePage> {
         children: [
           Container(
             color: AppColors.lightGreenBackground,
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: AppSizes.paddingLarge,
               vertical: AppSizes.paddingMedium,
             ),
@@ -84,8 +84,8 @@ class _DiseaseDatabasePageState extends State<DiseaseDatabasePage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.arrow_back),
-                  label: const Text('Back'),
+                  icon: Icon(Icons.arrow_back),
+                  label: Text('Back'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.white,
                     foregroundColor: AppColors.black87,
@@ -96,26 +96,23 @@ class _DiseaseDatabasePageState extends State<DiseaseDatabasePage> {
                       side: BorderSide(color: AppColors.grey300),
                     ),
                     elevation: AppSizes.cardElevation,
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: AppSizes.paddingMedium,
                       vertical: AppSizes.paddingSmall + 4,
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSizes.horizontalSpacing),
-                const Text(
-                  'Disease Database',
-                  style: AppTextStyles.pageHeaderTitle,
-                ),
+                SizedBox(width: AppSizes.horizontalSpacing),
+                Text('Disease Database', style: AppTextStyles.pageHeaderTitle),
               ],
             ),
           ),
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(AppSizes.paddingLarge),
+              padding: EdgeInsets.all(AppSizes.paddingLarge),
               child: Center(
                 child: Container(
-                  constraints: const BoxConstraints(maxWidth: 1000),
+                  constraints: BoxConstraints(maxWidth: 1000),
                   child: Column(
                     children: [
                       Card(
@@ -127,11 +124,11 @@ class _DiseaseDatabasePageState extends State<DiseaseDatabasePage> {
                           side: BorderSide(color: AppColors.grey300),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(AppSizes.paddingMedium),
+                          padding: EdgeInsets.all(AppSizes.paddingMedium),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 'Search Diseases',
                                 style: TextStyle(
                                   fontSize: 18,
@@ -139,7 +136,7 @@ class _DiseaseDatabasePageState extends State<DiseaseDatabasePage> {
                                   color: AppColors.black87,
                                 ),
                               ),
-                              const SizedBox(height: AppSizes.paddingSmall + 4),
+                              SizedBox(height: AppSizes.paddingSmall + 4),
                               TextField(
                                 controller:
                                     _searchController, // Assign controller
@@ -158,7 +155,7 @@ class _DiseaseDatabasePageState extends State<DiseaseDatabasePage> {
                                   ),
                                   filled: true,
                                   fillColor: AppColors.grey100,
-                                  contentPadding: const EdgeInsets.symmetric(
+                                  contentPadding: EdgeInsets.symmetric(
                                     vertical: AppSizes.paddingMedium,
                                     horizontal: AppSizes.paddingSmall + 2,
                                   ),
@@ -168,7 +165,7 @@ class _DiseaseDatabasePageState extends State<DiseaseDatabasePage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: AppSizes.verticalSpacing),
+                      SizedBox(height: AppSizes.verticalSpacing),
                       FutureBuilder<List<Disease>>(
                         future: _diseasesFuture, // Watch the future
                         builder: (context, snapshot) {
@@ -193,16 +190,16 @@ class _DiseaseDatabasePageState extends State<DiseaseDatabasePage> {
                               _filteredDiseases.isNotEmpty) {
                             // Display filtered diseases
                             return LayoutBuilder(
-                              builder: (context, constraints) {
+                              builder: (context, raints) {
                                 int crossAxisCount =
-                                    (constraints.maxWidth > 600) ? 2 : 1;
+                                    (raints.maxWidth > 600) ? 2 : 1;
                                 // Adjust childAspectRatio as needed for your DiseaseItemCard
                                 double childAspectRatio =
-                                    (constraints.maxWidth > 600) ? 2.0 : 1.5;
+                                    (raints.maxWidth > 600) ? 2.0 : 1.5;
 
                                 return GridView.builder(
                                   shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
+                                  physics: NeverScrollableScrollPhysics(),
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: crossAxisCount,
@@ -259,7 +256,7 @@ class _DiseaseDatabasePageState extends State<DiseaseDatabasePage> {
                             );
                           } else {
                             // No data found or empty filtered list
-                            return const Center(
+                            return Center(
                               child: Text(
                                 'No diseases found. Try a different search term.',
                               ),

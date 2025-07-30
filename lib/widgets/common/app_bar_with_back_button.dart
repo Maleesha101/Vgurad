@@ -13,15 +13,15 @@ class CustomAppBarWithBackButton extends StatelessWidget
       backgroundColor: AppColors.darkGreen,
       elevation: AppSizes.cardElevation,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: AppColors.white),
+        icon: Icon(Icons.arrow_back, color: AppColors.white),
         onPressed: () {
           Navigator.pop(context);
         },
       ),
       title: Row(
         children: [
-          const Icon(Icons.shield, color: AppColors.white),
-          const SizedBox(width: AppSizes.paddingSmall),
+          Icon(Icons.shield, color: AppColors.white),
+          SizedBox(width: AppSizes.paddingSmall),
           Text(title, style: AppTextStyles.appBarTitle),
         ],
       ),
@@ -29,7 +29,7 @@ class CustomAppBarWithBackButton extends StatelessWidget
         Container(
           width: AppSizes.iconSizeXXLarge,
           height: AppSizes.iconSizeXXLarge,
-          margin: const EdgeInsets.only(right: AppSizes.paddingMedium),
+          margin: EdgeInsets.only(right: AppSizes.paddingMedium),
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusSmall),
@@ -40,5 +40,5 @@ class CustomAppBarWithBackButton extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

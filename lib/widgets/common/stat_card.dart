@@ -15,9 +15,10 @@ class StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double Width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Card(
       elevation: AppSizes.cardElevation * 0.4,
-
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSizes.borderRadiusMedium),
         side: BorderSide(
@@ -27,10 +28,9 @@ class StatCard extends StatelessWidget {
       ),
       color: backgroundColor ?? AppColors.lightGreenBackground,
       child: Padding(
-        // Reduced padding slightly to give more room for content
-        padding: const EdgeInsets.symmetric(
-          vertical: AppSizes.paddingMedium,
-          horizontal: AppSizes.paddingLarge,
+        padding: EdgeInsets.symmetric(
+          vertical: Width * 0.02,
+          horizontal: Width * 0.02,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -43,11 +43,11 @@ class StatCard extends StatelessWidget {
                     backgroundColor == null
                         ? AppColors.primaryGreen
                         : AppColors.black87,
-                fontSize: AppSizes.iconSizeLarge,
+                fontSize: Width * 0.02,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: AppSizes.paddingSmall),
+            SizedBox(height: height * 0.005),
             Text(
               label,
               textAlign: TextAlign.center,
@@ -56,7 +56,7 @@ class StatCard extends StatelessWidget {
                     backgroundColor == null
                         ? AppColors.grey700
                         : AppColors.grey700,
-                fontSize: AppSizes.paddingMedium,
+                fontSize: Width * 0.014,
               ),
             ),
           ],

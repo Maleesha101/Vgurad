@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:vguard/core/app_constants.dart';
 import 'package:vguard/core/app_routes.dart';
 import 'package:vguard/services/auth_service.dart';
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const LoginPopup();
+        return LoginPopup();
       },
     );
   }
@@ -33,12 +34,12 @@ class _HomePageState extends State<HomePage> {
     if (mounted) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Logged out successfully!')));
+      ).showSnackBar(SnackBar(content: Text('Logged out successfully!')));
     }
   }
 
   // Define the admin email
-  static const String _adminEmail = 'admin@gmail.com';
+  static final String _adminEmail = 'admin@gmail.com';
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           Navigator.pushNamed(context, AppRoutes.askAdvisor);
         },
         backgroundColor: AppColors.darkGreen,
-        child: const Icon(Icons.chat_bubble_outline, color: Colors.white),
+        child: Icon(Icons.chat_bubble_outline, color: Colors.white),
       ),
       appBar: AppBar(
         backgroundColor: AppColors.darkGreen,
@@ -59,12 +60,22 @@ class _HomePageState extends State<HomePage> {
           width: 150,
           fit: BoxFit.contain,
         ),
+        toolbarHeight: 70,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppColors.darkGreen, AppColors.lightGreen],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         actions: [
           StreamBuilder<User?>(
             stream: _authService.authStateChanges,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator(color: AppColors.white);
+                return CircularProgressIndicator(color: AppColors.white);
               } else if (snapshot.hasData && snapshot.data != null) {
                 // User is logged in
                 final User? user = snapshot.data;
@@ -73,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                 if (isAdmin) {
                   // Admin user - display Admin button and Logout
                   return Padding(
-                    padding: const EdgeInsets.all(AppSizes.paddingSmall),
+                    padding: EdgeInsets.all(AppSizes.paddingSmall),
                     child: Row(
                       children: [
                         // Admin Panel button
@@ -96,22 +107,19 @@ class _HomePageState extends State<HomePage> {
                                 AppSizes.borderRadiusMedium,
                               ),
                             ),
-                            padding: const EdgeInsets.symmetric(
+                            padding: EdgeInsets.symmetric(
                               horizontal: AppSizes.paddingMedium,
                             ),
                           ),
-                          child: const Text(
+                          child: Text(
                             'Admin Panel',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        const SizedBox(width: AppSizes.paddingSmall),
+                        SizedBox(width: AppSizes.paddingSmall),
                         // Logout button for Admin
                         IconButton(
-                          icon: const Icon(
-                            Icons.logout,
-                            color: AppColors.white,
-                          ),
+                          icon: Icon(Icons.logout, color: AppColors.white),
                           onPressed: _handleSignOut,
                           tooltip: 'Logout',
                         ),
@@ -121,22 +129,19 @@ class _HomePageState extends State<HomePage> {
                 } else {
                   // Regular logged-in user - display user email and Logout
                   return Padding(
-                    padding: const EdgeInsets.all(AppSizes.paddingSmall),
+                    padding: EdgeInsets.all(AppSizes.paddingSmall),
                     child: Row(
                       children: [
                         Text(
                           user?.displayName ?? user?.email ?? 'User',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: AppColors.white,
                             fontSize: 16,
                           ),
                         ),
-                        const SizedBox(width: AppSizes.paddingSmall),
+                        SizedBox(width: AppSizes.paddingSmall),
                         IconButton(
-                          icon: const Icon(
-                            Icons.logout,
-                            color: AppColors.white,
-                          ),
+                          icon: Icon(Icons.logout, color: AppColors.white),
                           onPressed: _handleSignOut,
                           tooltip: 'Logout',
                         ),
@@ -147,7 +152,7 @@ class _HomePageState extends State<HomePage> {
               } else {
                 // User is not logged in - display Login button
                 return Padding(
-                  padding: const EdgeInsets.all(AppSizes.paddingSmall),
+                  padding: EdgeInsets.all(AppSizes.paddingSmall),
                   child: TextButton(
                     onPressed: _showLoginPopup,
                     style: TextButton.styleFrom(
@@ -158,11 +163,11 @@ class _HomePageState extends State<HomePage> {
                           AppSizes.borderRadiusMedium,
                         ),
                       ),
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: AppSizes.paddingMedium,
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Login',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
@@ -171,7 +176,7 @@ class _HomePageState extends State<HomePage> {
               }
             },
           ),
-          const SizedBox(width: AppSizes.paddingSmall),
+          SizedBox(width: AppSizes.paddingSmall),
         ],
       ),
       // Body content changes based on user role
@@ -179,7 +184,7 @@ class _HomePageState extends State<HomePage> {
         stream: _authService.authStateChanges,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData && snapshot.data != null) {
             final User? user = snapshot.data;
             final bool isAdmin = user?.email == _adminEmail;
@@ -210,7 +215,9 @@ class _HomePageState extends State<HomePage> {
 
   // Method to build content for regular users and logged-out state
   Widget _buildRegularUserContent() {
-    return const SingleChildScrollView(
+    double size = MediaQuery.of(context).size.height;
+    Logger().i('&size: $size');
+    return SingleChildScrollView(
       child: Column(
         children: [
           HeroSection(),

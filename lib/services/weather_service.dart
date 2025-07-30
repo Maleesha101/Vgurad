@@ -9,7 +9,7 @@ class WeatherService {
   static final String _apiKey = dotenv.env['_weatherApiKey'] ?? '';
 
   ///replace
-  static const String _baseUrl =
+  static final String _baseUrl =
       'https://api.openweathermap.org/data/2.5/weather';
 
   Future<WeatherData> fetchWeatherData(

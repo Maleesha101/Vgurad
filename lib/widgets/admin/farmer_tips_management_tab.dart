@@ -25,7 +25,7 @@ class _FarmerTipsManagementTabState extends State<FarmerTipsManagementTab> {
         _categoryController.text.isEmpty) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Please fill all fields.')));
+      ).showSnackBar(SnackBar(content: Text('Please fill all fields.')));
       return;
     }
 
@@ -40,7 +40,7 @@ class _FarmerTipsManagementTabState extends State<FarmerTipsManagementTab> {
       await _adminDataService.addFarmerTip(newTip);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Farmer tip added successfully!')),
+          SnackBar(content: Text('Farmer tip added successfully!')),
         );
         _titleController.clear();
         _contentController.clear();
@@ -60,7 +60,7 @@ class _FarmerTipsManagementTabState extends State<FarmerTipsManagementTab> {
       await _adminDataService.deleteFarmerTip(id);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Farmer tip deleted successfully!')),
+          SnackBar(content: Text('Farmer tip deleted successfully!')),
         );
       }
     } catch (e) {
@@ -83,83 +83,116 @@ class _FarmerTipsManagementTabState extends State<FarmerTipsManagementTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSizes.paddingXLarge),
+      padding: EdgeInsets.all(AppSizes.paddingXLarge),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '+ Add New Tip',
-            style: AppTextStyles.heading2.copyWith(color: AppColors.black87),
+            style: AppTextStyles.heading2.copyWith(
+              color: AppColors.black87,
+              fontSize: 20,
+            ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _titleController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Enter tip title',
               labelText: 'Title',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _categoryController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Enter category',
               labelText: 'Category',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingMedium),
           TextField(
             controller: _contentController,
             maxLines: 5,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: AppColors.grey100,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryGreen),
+              ),
               hintText: 'Enter tip content',
               labelText: 'Content',
             ),
           ),
-          const SizedBox(height: AppSizes.paddingXLarge),
+          SizedBox(height: AppSizes.paddingXLarge * 2),
           SizedBox(
             width: double.infinity,
+            height: 50,
             child: ElevatedButton.icon(
               onPressed: _addFarmerTip,
-              icon: const Icon(Icons.add),
-              label: const Text('Add Tip'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primaryGreen,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    AppSizes.borderRadiusMedium,
+                  ),
+                ),
+              ),
+              icon: Icon(Icons.add, color: AppColors.white),
+              autofocus: true,
+              label: Text(
+                'Add Farmer Tip',
+                style: TextStyle(fontSize: 16, color: AppColors.white),
+              ),
             ),
           ),
-          const SizedBox(height: AppSizes.paddingXLarge),
-          Text(
-            'Existing Farmer Tips',
-            style: AppTextStyles.heading2.copyWith(color: AppColors.black87),
-          ),
-          const SizedBox(height: AppSizes.paddingMedium),
+          SizedBox(height: AppSizes.paddingXLarge),
+
+          SizedBox(height: AppSizes.paddingMedium),
           StreamBuilder<List<FarmerTip>>(
             stream: _adminDataService.getFarmerTips(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text('No farmer tips added yet.'));
+                return Center(child: Text('No farmer tips added yet.'));
               } else {
                 final tips = snapshot.data!;
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: tips.length,
                   itemBuilder: (context, index) {
                     final tip = tips[index];
                     return Card(
-                      margin: const EdgeInsets.symmetric(
+                      color: AppColors.grey50,
+                      margin: EdgeInsets.symmetric(
                         vertical: AppSizes.paddingSmall,
                       ),
-                      elevation: AppSizes.cardElevation,
+                      elevation: 0,
                       shape: RoundedRectangleBorder(
+                        side: BorderSide(color: AppColors.grey200),
                         borderRadius: BorderRadius.circular(
                           AppSizes.borderRadiusMedium,
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(AppSizes.paddingMedium),
+                        padding: EdgeInsets.all(AppSizes.paddingMedium),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -173,11 +206,10 @@ class _FarmerTipsManagementTabState extends State<FarmerTipsManagementTab> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: AppSizes.paddingSmall * 0.6,
-                                  ),
+                                  SizedBox(height: 10),
+                                  SizedBox(height: AppSizes.paddingSmall * 0.6),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                       horizontal: AppSizes.paddingSmall,
                                       vertical: 2,
                                     ),
@@ -197,7 +229,7 @@ class _FarmerTipsManagementTabState extends State<FarmerTipsManagementTab> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: AppSizes.paddingSmall),
+                                  SizedBox(height: AppSizes.paddingSmall),
                                   Text(
                                     'Date Added: ${DateFormat('yyyy-MM-dd').format(tip.dateAdded)}',
                                     style: TextStyle(
@@ -205,7 +237,7 @@ class _FarmerTipsManagementTabState extends State<FarmerTipsManagementTab> {
                                       fontSize: 13,
                                     ),
                                   ),
-                                  const SizedBox(height: AppSizes.paddingSmall),
+                                  SizedBox(height: AppSizes.paddingSmall),
                                   Text(
                                     tip.content,
                                     style: AppTextStyles.bodyMedium.copyWith(
@@ -218,10 +250,7 @@ class _FarmerTipsManagementTabState extends State<FarmerTipsManagementTab> {
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(
-                                Icons.delete,
-                                color: AppColors.red,
-                              ),
+                              icon: Icon(Icons.delete, color: AppColors.red),
                               onPressed: () => _deleteFarmerTip(tip.id!),
                             ),
                           ],

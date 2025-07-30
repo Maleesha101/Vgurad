@@ -10,27 +10,27 @@ class FeatureCardsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        padding: const EdgeInsets.all(AppSizes.paddingLarge),
-        constraints: const BoxConstraints(maxWidth: 1200),
+        padding: EdgeInsets.all(AppSizes.paddingLarge),
+        constraints: BoxConstraints(maxWidth: 1200),
         child: LayoutBuilder(
-          builder: (context, constraints) {
+          builder: (context, raints) {
             int crossAxisCount;
-            if (constraints.maxWidth > 900) {
+            if (raints.maxWidth > 900) {
               crossAxisCount = 2;
-            } else if (constraints.maxWidth > 600) {
+            } else if (raints.maxWidth > 600) {
               crossAxisCount = 2;
             } else {
               crossAxisCount = 1;
             }
 
-            double childAspectRatio = (constraints.maxWidth > 900) ? 2.5 : 2.0;
+            double childAspectRatio = (raints.maxWidth > 900) ? 2.5 : 2.0;
             if (crossAxisCount == 1) {
               childAspectRatio = 3.0;
             }
 
             return GridView.count(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               crossAxisCount: crossAxisCount,
               childAspectRatio: childAspectRatio,
               mainAxisSpacing: AppSizes.verticalSpacing,
@@ -40,7 +40,7 @@ class FeatureCardsSection extends StatelessWidget {
                   icon: Icons.camera_alt_outlined,
                   title: 'Scan Your Crop',
                   description:
-                      'Take a photo to detect diseases and get instant treatment recommendations',
+                      'To detect diseases and get instant treatment recommendations',
                   buttonText: 'Scan Your Crop',
                   onButtonPressed: () {
                     Navigator.pushNamed(context, AppRoutes.scanCrop);

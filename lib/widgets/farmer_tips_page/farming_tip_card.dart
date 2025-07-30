@@ -31,7 +31,7 @@ class FarmingTipCard extends StatelessWidget {
       ),
       color: AppColors.white,
       child: Padding(
-        padding: const EdgeInsets.all(AppSizes.paddingLarge),
+        padding: EdgeInsets.all(AppSizes.paddingLarge),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,20 +43,20 @@ class FarmingTipCard extends StatelessWidget {
                   size: AppSizes.iconSizeLarge,
                   color: AppColors.primaryGreen,
                 ),
-                const SizedBox(width: AppSizes.paddingMedium),
+                SizedBox(width: AppSizes.paddingMedium),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: AppColors.black87,
                         ),
                       ),
-                      const SizedBox(height: AppSizes.borderRadiusSmall),
+                      SizedBox(height: AppSizes.borderRadiusSmall),
                       Text(
                         dateRange,
                         style: TextStyle(
@@ -68,7 +68,7 @@ class FarmingTipCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: AppSizes.paddingSmall,
                     vertical: AppSizes.borderRadiusSmall,
                   ),
@@ -89,30 +89,28 @@ class FarmingTipCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSizes.paddingMedium),
+            SizedBox(height: AppSizes.paddingMedium),
             Text(
               'Season: $season',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: AppColors.black87,
               ),
             ),
-            const SizedBox(height: AppSizes.paddingSmall + 2),
+            SizedBox(height: AppSizes.paddingSmall + 2),
             ...tips.map(
               (tip) => Padding(
-                padding: const EdgeInsets.only(
-                  bottom: AppSizes.paddingSmall - 2,
-                ),
+                padding: EdgeInsets.only(bottom: AppSizes.paddingSmall - 2),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.circle,
                       size: AppSizes.paddingSmall,
                       color: AppColors.primaryGreen,
                     ),
-                    const SizedBox(width: AppSizes.paddingSmall),
+                    SizedBox(width: AppSizes.paddingSmall),
                     Expanded(
                       child: Text(
                         tip,
@@ -126,7 +124,7 @@ class FarmingTipCard extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(),
+            Spacer(),
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
@@ -135,8 +133,8 @@ class FarmingTipCard extends StatelessWidget {
                 },
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.primaryGreen,
-                  side: const BorderSide(color: AppColors.primaryGreen),
-                  padding: const EdgeInsets.symmetric(
+                  side: BorderSide(color: AppColors.primaryGreen),
+                  padding: EdgeInsets.symmetric(
                     vertical: AppSizes.paddingMedium - 2,
                   ),
                   shape: RoundedRectangleBorder(
@@ -145,10 +143,7 @@ class FarmingTipCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: const Text(
-                  'Save to My Notes',
-                  style: TextStyle(fontSize: 15),
-                ),
+                child: Text('Save to My Notes', style: TextStyle(fontSize: 15)),
               ),
             ),
           ],

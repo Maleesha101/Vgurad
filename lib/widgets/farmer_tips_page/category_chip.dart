@@ -31,7 +31,7 @@ class CategoryChip extends StatelessWidget {
         side:
             isSelected ? BorderSide.none : BorderSide(color: AppColors.grey300),
       ),
-      padding: const EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         horizontal: AppSizes.paddingMedium,
         vertical: AppSizes.paddingSmall + 2,
       ),

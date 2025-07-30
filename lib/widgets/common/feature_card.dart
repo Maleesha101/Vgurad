@@ -30,7 +30,7 @@ class _FeatureCardState extends State<FeatureCard>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: Duration(milliseconds: 200),
       vsync: this,
     );
     _animation = Tween<double>(
@@ -55,6 +55,8 @@ class _FeatureCardState extends State<FeatureCard>
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return MouseRegion(
       onEnter: _onHoverEnter,
       onExit: _onHoverExit,
@@ -73,12 +75,15 @@ class _FeatureCardState extends State<FeatureCard>
               ),
               color: AppColors.white,
               child: Padding(
-                padding: const EdgeInsets.all(AppSizes.paddingXLarge),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppSizes.paddingXLarge,
+                  vertical: AppSizes.paddingLarge * 0.6,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(AppSizes.paddingSmall + 4),
+                      padding: EdgeInsets.all(AppSizes.paddingSmall + 4),
                       decoration: BoxDecoration(
                         color: AppColors.lightGreenAccent,
                         shape: BoxShape.circle,
@@ -89,13 +94,22 @@ class _FeatureCardState extends State<FeatureCard>
                         size: AppSizes.iconSizeXLarge,
                       ),
                     ),
-                    Text(widget.title, style: AppTextStyles.featureCardTitle),
-                    const SizedBox(height: AppSizes.paddingSmall),
+                    SizedBox(height: height * 0.01),
+                    Text(
+                      widget.title,
+                      style: AppTextStyles.featureCardTitle.copyWith(
+                        fontSize: width * 0.015,
+                      ),
+                    ),
+                    SizedBox(height: 2),
                     Text(
                       widget.description,
-                      style: TextStyle(fontSize: 15, color: AppColors.grey700),
+                      style: TextStyle(
+                        fontSize: width * 0.011,
+                        color: AppColors.grey700,
+                      ),
                     ),
-                    const Spacer(),
+                    SizedBox(height: height * 0.03),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -103,8 +117,8 @@ class _FeatureCardState extends State<FeatureCard>
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryGreen,
                           foregroundColor: AppColors.white,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: AppSizes.paddingMedium,
+                          padding: EdgeInsets.symmetric(
+                            vertical: width * 0.013,
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
@@ -115,9 +129,7 @@ class _FeatureCardState extends State<FeatureCard>
                         ),
                         child: Text(
                           widget.buttonText,
-                          style: const TextStyle(
-                            fontSize: AppSizes.paddingMedium,
-                          ),
+                          style: TextStyle(fontSize: width * 0.012),
                         ),
                       ),
                     ),

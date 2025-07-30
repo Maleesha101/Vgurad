@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 // Colors
 class AppColors {
-  static const Color primaryGreen = Color(0xFF4CAF50);
-  static const Color darkGreen = Color(0xFF2E7D32);
-  static const Color lightGreenBackground = Color(0xFFF0FDF4);
-  static const Color lightGreenAccent = Color(0xFFE8F5E9);
-  static const Color yellowBackground = Color(0xFFFFFBE6);
+  static Color primaryGreen = Color(0xFF4CAF50);
+  static Color darkGreen = Color(0xFF2E7D32);
+  static Color lightGreen = Color(0x00358c24);
+  static Color lightGreenBackground = Color(0xFFF0FDF4);
+  static Color lightGreenAccent = Color(0xFFE8F5E9);
+  static Color yellowBackground = Color(0xFFFFFBE6);
+  static Color lWhite = Color(0x00f9fbf9);
   static Color amber200 = Colors.amber.shade200;
   static Color amber700 = Colors.amber.shade700;
 
@@ -93,10 +95,10 @@ class AppTextStyles {
     height: 1.5,
   );
 
-  static const TextStyle featureCardTitle = TextStyle(
+  static TextStyle featureCardTitle = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
-    color: AppColors.black87,
+    color: AppColors.black87.withOpacity(0.75),
   );
 
   static const TextStyle pageHeaderTitle = TextStyle(

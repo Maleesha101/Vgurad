@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:vguard/core/app_constants.dart';
@@ -125,8 +126,8 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
       SnackBar(
         content: Row(
           children: [
-            const Icon(Icons.check_circle_outline, color: AppColors.white),
-            const SizedBox(width: AppSizes.paddingSmall),
+            Icon(Icons.check_circle_outline, color: AppColors.white),
+            SizedBox(width: AppSizes.paddingSmall),
             Text(
               'Thank you for your question!',
               style: TextStyle(color: AppColors.white),
@@ -134,12 +135,12 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
           ],
         ),
         backgroundColor: AppColors.primaryGreen,
-        duration: const Duration(seconds: 3),
+        duration: Duration(seconds: 3),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSizes.borderRadiusMedium),
         ),
-        margin: const EdgeInsets.all(AppSizes.paddingLarge),
+        margin: EdgeInsets.all(AppSizes.paddingLarge),
       ),
     );
   }
@@ -162,7 +163,7 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
         children: [
           Container(
             color: AppColors.lightGreenBackground,
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: AppSizes.paddingLarge,
               vertical: AppSizes.paddingMedium,
             ),
@@ -173,8 +174,8 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.arrow_back),
-                  label: const Text('Back'),
+                  icon: Icon(Icons.arrow_back),
+                  label: Text('Back'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.white,
                     foregroundColor: AppColors.black87,
@@ -185,23 +186,26 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
                       side: BorderSide(color: AppColors.grey300),
                     ),
                     elevation: AppSizes.cardElevation,
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: AppSizes.paddingMedium,
                       vertical: AppSizes.paddingSmall + 4,
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSizes.horizontalSpacing),
-                const Text(
+                SizedBox(width: AppSizes.horizontalSpacing),
+                Text(
                   'AI Agricultural Advisor',
-                  style: AppTextStyles.pageHeaderTitle,
+                  style: AppTextStyles.pageHeaderTitle.copyWith(
+                    color: AppColors.black87,
+                    fontSize: 18,
+                  ),
                 ),
               ],
             ),
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(100),
+              padding: EdgeInsets.all(50),
               child: ListView.builder(
                 reverse: false,
                 itemCount: _messages.length,
@@ -213,7 +217,10 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(AppSizes.paddingMedium),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.paddingMedium,
+              vertical: AppSizes.paddingSmall,
+            ),
             child: Form(
               key: _formKey,
               child: Row(
@@ -247,7 +254,7 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
                         ),
                         filled: true,
                         fillColor: AppColors.white,
-                        contentPadding: const EdgeInsets.symmetric(
+                        contentPadding: EdgeInsets.symmetric(
                           horizontal: AppSizes.paddingLarge,
                           vertical: AppSizes.paddingMedium,
                         ),
@@ -262,7 +269,7 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
                       },
                     ),
                   ),
-                  const SizedBox(width: AppSizes.paddingSmall),
+                  SizedBox(width: AppSizes.paddingSmall),
                   FloatingActionButton(
                     onPressed:
                         _isSending
@@ -282,7 +289,7 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
                                 ),
                               ),
                             )
-                            : const Icon(Icons.send, color: AppColors.white),
+                            : Icon(Icons.send, color: AppColors.white),
                   ),
                 ],
               ),
@@ -297,11 +304,11 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
     return Align(
       alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        margin: const EdgeInsets.symmetric(
+        margin: EdgeInsets.symmetric(
           vertical: AppSizes.paddingSmall / 2,
           horizontal: AppSizes.paddingSmall,
         ),
-        padding: const EdgeInsets.all(AppSizes.paddingMedium),
+        padding: EdgeInsets.all(AppSizes.paddingMedium),
         decoration: BoxDecoration(
           color:
               message.isUser
@@ -312,12 +319,12 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
           ).copyWith(
             bottomLeft:
                 message.isUser
-                    ? const Radius.circular(AppSizes.borderRadiusSmall)
-                    : const Radius.circular(AppSizes.borderRadiusMedium),
+                    ? Radius.circular(AppSizes.borderRadiusSmall)
+                    : Radius.circular(AppSizes.borderRadiusMedium),
             bottomRight:
                 message.isUser
-                    ? const Radius.circular(AppSizes.borderRadiusMedium)
-                    : const Radius.circular(AppSizes.borderRadiusSmall),
+                    ? Radius.circular(AppSizes.borderRadiusMedium)
+                    : Radius.circular(AppSizes.borderRadiusSmall),
           ),
           border: message.isUser ? null : Border.all(color: AppColors.grey300),
         ),
@@ -336,10 +343,21 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
                     ),
                   ),
                 )
-                : Text(
+                : message.isUser
+                ? Text(
                   message.text,
                   style: TextStyle(
                     color: message.isUser ? AppColors.white : AppColors.black87,
+                  ),
+                )
+                : MarkdownBody(
+                  data: message.text,
+                  styleSheet: MarkdownStyleSheet(
+                    p: TextStyle(color: AppColors.black87, fontSize: 14),
+                    strong: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.black87,
+                    ),
                   ),
                 ),
       ),
