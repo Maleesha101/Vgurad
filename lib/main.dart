@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:vguard/core/app_routes.dart';
 import 'package:vguard/firebase_options.dart';
@@ -13,7 +12,7 @@ import 'package:vguard/pages/farmer_tips_page.dart';
 import 'package:vguard/pages/home_page.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
+  // await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
