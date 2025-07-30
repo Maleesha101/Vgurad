@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:vguard/config.dart';
 import 'package:vguard/core/app_constants.dart';
-
-final String apiKey = 'AIzaSyBItHMcDz_NkJ4iWl3SmgFPM7QlMCo83ZQ';
 
 class Message {
   final String text;
@@ -33,7 +32,7 @@ class _AskAdvisorPageState extends State<AskAdvisorPage> {
     super.initState();
     _model = GenerativeModel(
       model: 'gemini-1.5-flash',
-      apiKey: apiKey,
+      apiKey: AppConfig.geminiApiKey,
       safetySettings: [
         SafetySetting(HarmCategory.harassment, HarmBlockThreshold.none),
         SafetySetting(HarmCategory.hateSpeech, HarmBlockThreshold.none),
