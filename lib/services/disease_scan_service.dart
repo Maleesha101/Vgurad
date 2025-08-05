@@ -9,7 +9,7 @@ import 'package:vguard/models/medicine.dart';
 import 'package:vguard/models/prediction_response.dart';
 
 class DiseaseScanService {
-  static const String _baseUrl = "http://4.224.250.251";
+  static const String _baseUrl = "http://4.224.250.251:8000";
 
   // Method to predict disease from an image
   Future<PredictionResponse> predictDisease(dynamic imageData) async {
